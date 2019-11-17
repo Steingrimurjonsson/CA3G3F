@@ -7,10 +7,10 @@ function handleHttpErrors(res) {
   
 }
 
-class ApiFacade {
+class ApiFacadeAdmin {
   fetchData = () => {
     const options = this.makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+    return fetch(URL + "/api/info/admin", options).then(handleHttpErrors);
   };
 
   setToken = token => {
@@ -23,7 +23,7 @@ class ApiFacade {
     const loggedIn = this.getToken() != null;
     return loggedIn;
   };
-  logout = () => {
+  logoutAsAdmin = () => {
     localStorage.removeItem("jwtToken");
   };
 
@@ -43,7 +43,7 @@ class ApiFacade {
     }
     return opts;
   }
-  login = (user, pass) => {
+  loginAsAdmin = (user, pass) => {
     const options = this.makeOptions("POST", true, {
       username: user,
       password: pass
@@ -56,5 +56,5 @@ class ApiFacade {
   };
 }
 
-const facade = new ApiFacade();
-export default facade;
+const facadeAdmin = new ApiFacadeAdmin();
+export default facadeAdmin;
